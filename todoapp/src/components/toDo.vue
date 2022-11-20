@@ -35,7 +35,7 @@
                 </template>
             </v-simple-table>
         </v-card>
-        <modalDialog v-if="isVisible" />
+        <modalDialog v-show="isVisible" @close="closeModalDialog" />
     </v-app>
 </template>
 <script>
@@ -55,7 +55,6 @@ export default {
         },
         closeModalDialog() {
             this.isVisible = false
-            console.log("cncel")
         },
         addTask() {
             this.showModalDialog()

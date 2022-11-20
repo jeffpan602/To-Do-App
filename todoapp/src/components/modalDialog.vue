@@ -3,7 +3,7 @@
         <div class="modalDialog">
             <v-card>
                 <!-- panel header -->
-                <v-card-title class='headline primary justify-left' primary-title style='color: white;'>
+                <v-card-title class='headline primary justify-left' primary-title style="color: white">
                     <div>
                         <span class="fa-solid fa-circle-plus" />Add Task
                     </div>
@@ -47,7 +47,7 @@
                                 <i class="fa-solid fa-circle-plus"></i> ADD
                             </v-btn>
                         </div>
-                        <v-btn color="error" elevation="2" @click="closeModalDialog"> <span class="fa-solid fa-ban" />
+                        <v-btn color="error" elevation="2" @click="close"> <span class="fa-solid fa-ban" />
                             CANCEL
                         </v-btn>
                     </v-layout>
@@ -63,6 +63,12 @@ export default {
     props: {
         isVisible: Boolean,
         isAddTask: Boolean
+    },
+    methods: {
+        close() {
+            this.$emit('close');
+
+        }
     }
 }
 </script>
