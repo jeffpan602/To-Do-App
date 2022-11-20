@@ -6,9 +6,11 @@
                 <v-spacer />
                 <span class="fa-solid fa-bars" /> &nbsp; FRAMEWORKS
                 <v-spacer />
-                <v-btn @click="addTask" color="primary" elevation="1">
+
+                <v-btn color="primary" elevation="1">
                     <span class="fa-solid fa-circle-plus" />ADD
                 </v-btn>
+
             </v-card-title>
             <!--panel body-->
             <v-simple-table style='margin: 20px;'>
