@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <ToDoApp />
+    <toDo />
   </div>
 </template>
 
 <script>
-import ToDoApp from './components/ToDoApp';
+import toDo from './components/toDo';
 
 export default {
   name: 'App',
 
   components: {
-    ToDoApp,
+    toDo,
   },
 
   data: () => ({

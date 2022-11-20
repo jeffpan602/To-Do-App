@@ -6,7 +6,7 @@
                 <v-spacer />
                 <span class="fa-solid fa-bars" /> &nbsp; FRAMEWORKS
                 <v-spacer />
-                <v-btn color="primary" elevation="1">
+                <v-btn @click="addTask" color="primary" elevation="1">
                     <span class="fa-solid fa-circle-plus" />ADD
                 </v-btn>
             </v-card-title>
