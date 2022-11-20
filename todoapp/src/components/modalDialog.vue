@@ -47,7 +47,8 @@
                                 <i class="fa-solid fa-circle-plus"></i> ADD
                             </v-btn>
                         </div>
-                        <v-btn color="error" elevation="2" @click="close"> <span class="fa-solid fa-ban" /> CANCEL
+                        <v-btn color="error" elevation="2" @click="closeModalDialog"> <span class="fa-solid fa-ban" />
+                            CANCEL
                         </v-btn>
                     </v-layout>
                 </v-form>
@@ -57,6 +58,13 @@
 </template>
 
 <script>
+export default {
+    name: 'modalDialog',
+    props: {
+        isVisible: Boolean,
+        isAddTask: Boolean
+    }
+}
 </script>
 
 <style>

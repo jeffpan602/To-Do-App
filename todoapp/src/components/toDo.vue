@@ -7,7 +7,7 @@
                 <span class="fa-solid fa-bars" /> &nbsp; FRAMEWORKS
                 <v-spacer />
 
-                <v-btn color="primary" elevation="1">
+                <v-btn @click="addTask" color="primary" elevation="1">
                     <span class="fa-solid fa-circle-plus" />ADD
                 </v-btn>
 
@@ -35,7 +35,7 @@
                 </template>
             </v-simple-table>
         </v-card>
-        <modalDialog />
+        <modalDialog v-if="isVisible" />
     </v-app>
 </template>
 <script>
@@ -49,7 +49,18 @@ export default {
     //life cycles
     created() { },
     //methods
-    methods: {},
+    methods: {
+        showModalDialog() {
+            this.isVisible = true
+        },
+        closeModalDialog() {
+            this.isVisible = false
+            console.log("cncel")
+        },
+        addTask() {
+            this.showModalDialog()
+        }
+    },
     //watchers
     watch: {},
     //computed
@@ -57,9 +68,9 @@ export default {
     //global vars
     data() {
         return {
-
+            isVisible: false
         };
 
-    },
+    }
 }
 </script>
