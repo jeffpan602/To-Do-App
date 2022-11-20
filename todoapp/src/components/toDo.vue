@@ -35,11 +35,17 @@
                 </template>
             </v-simple-table>
         </v-card>
+        <modalDialog />
     </v-app>
 </template>
 <script>
+import modalDialog from './modalDialog.vue';
 //master
 export default {
+    name: 'toDo',
+    components: {
+        modalDialog
+    },
     //life cycles
     created() { },
     //methods
