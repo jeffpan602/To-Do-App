@@ -27,15 +27,15 @@
                             </template>
                             <v-date-picker v-model="date" no-title scrollable>
                                 <v-spacer></v-spacer>
-                                <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
-                                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                                <v-btn text color="primary"> Cancel </v-btn>
+                                <v-btn text color="primary">OK</v-btn>
                             </v-date-picker>
                         </v-menu>
                     </v-layout>
 
-                    <v-radio-group label="Priority" class="elements mx-4 my-0" v-model="priority">
+                    <v-radio-group label="Priority" class="elements mx-6 my-0" v-model="priority">
                         <v-layout align-start row d-flex justify-space-between>
-                            <v-radio label="Low" value="low" /> &nbsp;
+                            <v-radio label="Low" value="low" checked="true" /> &nbsp;
                             <v-radio label="Med" value="med" /> &nbsp;
                             <v-radio label="High" value="high" />
                         </v-layout>
@@ -69,6 +69,12 @@ export default {
             this.$emit('close');
 
         }
+    },
+    data() {
+        return {
+            priority: 'low',
+        }
+
     }
 }
 </script>
