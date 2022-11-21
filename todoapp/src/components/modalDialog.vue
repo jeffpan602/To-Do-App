@@ -81,7 +81,7 @@ export default {
             this.$emit('close')
         },
         clear() {
-            this.$refs.form.reset()
+            this.$refs.form.resetValidation()
             this.title = ''
             this.description = ''
             this.date = ''
