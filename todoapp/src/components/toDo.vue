@@ -46,7 +46,7 @@
                                     </v-btn>
                                 </v-layout>
                                 <v-layout justify-center>
-                                    <v-btn class="button mb-2" color="error" elevation="1" small
+                                    <v-btn class="delete button mb-2" color="error" elevation="1" small
                                         @click="deleteTask(index)">
                                         <span class="fa-solid fa-circle-xmark" /> DELETE
                                     </v-btn>
@@ -117,3 +117,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.delete {
+    width: 90px;
+}
+</style>
