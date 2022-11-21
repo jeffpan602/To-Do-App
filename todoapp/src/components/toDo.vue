@@ -1,5 +1,5 @@
 <template>
-    <v-app style='margin:30px'>
+    <v-app style='margin: 30px'>
         <v-card>
             <!--panel header-->
             <v-card-title class='headline primary' primary-title style="color: white;">
@@ -7,7 +7,7 @@
                 <span class="fa-solid fa-bars" /> &nbsp; FRAMEWORKS
                 <v-spacer />
 
-                <v-btn @click="addTask" color="primary" elevation="1">
+                <v-btn @click="showModalDialog" color="primary" elevation="1">
                     <span class="fa-solid fa-circle-plus" />ADD
                 </v-btn>
 
@@ -28,14 +28,22 @@
                     </thead>
                     <!--table body-->
                     <tbody>
-                        <tr>
-                            <td>{{ }}</td>
+                        <tr v-for="(task, index) in tasks" :key="index">
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>{{ task.deadline }}</td>
+                            <td>{{ task.priority }}</td>
+                            <td>
+                                <v-layout justify-center>
+                                    <v-checkbox />
+                                </v-layout>
+                            </td>
                         </tr>
                     </tbody>
                 </template>
             </v-simple-table>
         </v-card>
-        <modalDialog v-show="isVisible" @close="closeModalDialog" />
+        <modalDialog v-show="isVisible" @close="closeModalDialog" :isAddTask=isAddTask />
     </v-app>
 </template>
 <script>
@@ -52,13 +60,12 @@ export default {
     methods: {
         showModalDialog() {
             this.isVisible = true
+            this.isAddTask = true
         },
         closeModalDialog() {
             this.isVisible = false
-        },
-        addTask() {
-            this.showModalDialog()
         }
+
     },
     //watchers
     watch: {},
@@ -67,7 +74,14 @@ export default {
     //global vars
     data() {
         return {
-            isVisible: false
+            isVisible: false,
+
+            tasks: [],
+            title: '',
+            description: '',
+            deadline: '',
+            priority: 'low',
+            taskIndex: ''
         };
 
     }

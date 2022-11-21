@@ -4,34 +4,41 @@
             <v-card>
                 <!-- panel header -->
                 <v-card-title class='headline primary justify-left' primary-title style="color: white">
-                    <div>
+                    <div v-if="isAddTask">
                         <span class="fa-solid fa-circle-plus" />Add Task
+                    </div>
+                    <div v-else>
+                        <span class="fa-solid fa-pen-to-square" /> &nbsp; Edit Task
                     </div>
                 </v-card-title>
                 <!-- panel body-->
                 <v-form ref="form" lazy-validation>
-                    <v-layout class="elements mx-5 mb-0 mt-7">
-                        <v-text-field label="Title" outlined v-model="title" required />
+                    <v-layout v-if="isAddTask" class="elements mx-5 mb-0 mt-7">
+                        <v-text-field label="Title" outlined v-model="title" required
+                            :rules="[v => !!v || 'Title is Required!']" />
                     </v-layout>
 
-                    <v-layout class="element mx-5 my-2">
-                        <v-text-field label="Description" outlined v-model="description" required />
+                    <v-layout v - layout class=" element mx-5 my-2">
+                        <v-text-field label="Description" outlined v-model="description" required
+                            :rules="[v => !!v || 'Description is Required!']" />
                     </v-layout>
 
                     <v-layout class="elements mx-5 my-0">
-                        <v-menu ref="menu" :close-on-content-click="false" :return-value.sync="deadline"
-                            transition="scale-transition" offset-y min-width="auto">
+                        <v-menu v-ref="menu" :return-value.sync="deadline" transition="scale-transition" offset-y
+                            min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="deadline" label="Deadline" append-icon="mdi-calendar"
-                                    v-bind="attrs" v-on="on" readonly outlined required />
+                                    v-bind="attrs" v-on="on" readonly outlined required
+                                    :rules="[v => !!v || 'Deadline is required']" />
                             </template>
-                            <v-date-picker v-model="date" no-title scrollable>
+                            <v-date-picker v-model="date" no-title scrollable :close-on-content-click="false">
                                 <v-spacer></v-spacer>
-                                <v-btn text color="primary"> Cancel </v-btn>
+                                <v-btn text color="primary" @click="date = false"> Cancel </v-btn>
                                 <v-btn text color="primary">OK</v-btn>
                             </v-date-picker>
                         </v-menu>
                     </v-layout>
+
 
                     <v-radio-group label="Priority" class="elements mx-6 my-0" v-model="priority">
                         <v-layout align-start row d-flex justify-space-between>
@@ -62,17 +69,24 @@ export default {
     name: 'modalDialog',
     props: {
         isVisible: Boolean,
-        isAddTask: Boolean
+        isAddTask: Boolean,
+        existing_description: String,
+        existing_deadline: String,
+        existing_priority: String,
+        tasks: Array
     },
     methods: {
         close() {
             this.$emit('close');
 
+        },
+        addTask() {
+
         }
     },
     data() {
         return {
-            priority: 'low',
+            priority: 'low'
         }
 
     }
