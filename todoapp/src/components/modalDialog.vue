@@ -14,8 +14,7 @@
                 <!-- panel body-->
                 <v-form ref="form" lazy-validation>
                     <v-layout v-if="isAddTask" class="elements mx-5 mb-0 mt-7">
-                        <v-text-field label="Title" outlined v-model="title" required :rules="[
-                        v => !!v || 'Title is Required!']" />
+                        <v-text-field label="Title" outlined v-model="title" required :rules="titleValidation" />
                     </v-layout>
 
                     <v-layout class=" element mx-5 my-2">
@@ -118,6 +117,9 @@ export default {
             this.date = this.existing_date;
             this.priority = this.existing_priority;
         },
+        isDistinctTitle(title) {
+            return !this.tasks.filter(e => e.title === title).length > 0
+        }
     },
     watch: {
         date() {
@@ -137,6 +139,10 @@ export default {
             deadline: '',
             priority: 'low',
             date: '',
+            titleValidation: [
+                v => !!v || 'Title is Required!',
+                v => this.isDistinctTitle(v) || 'Title must be Distinct'
+            ]
         }
 
     },
