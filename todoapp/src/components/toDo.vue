@@ -104,18 +104,18 @@ export default {
             this.$toasted.success("The task has been successfully deleted!")
         },
         editTaskDialog(index) {
-            this.taskIndex = index;
-            this.isAddTask = false;
-            this.description = this.tasks[this.taskIndex].description;
-            this.date = this.tasks[this.taskIndex].date;
-            this.priority = this.tasks[this.taskIndex].priority;
+            this.taskIndex = index
+            this.isAddTask = false
+            this.description = this.tasks[this.taskIndex].description
+            this.date = this.tasks[this.taskIndex].date
+            this.priority = this.tasks[this.taskIndex].priority
             this.showModalDialog();
         },
         editTask(description, date, priority) {
-            this.tasks[this.taskIndex].description = description;
-            this.tasks[this.taskIndex].date = date;
-            this.tasks[this.taskIndex].priority = priority;
-            this.$toasted.success("the task was updated successfully");
+            this.tasks[this.taskIndex].description = description
+            this.tasks[this.taskIndex].date = date
+            this.tasks[this.taskIndex].priority = priority
+            this.$toasted.success("The task has been successfully updated!")
         }
     },
     //watchers
@@ -128,7 +128,14 @@ export default {
             isVisible: false,
             isAddTask: true,
 
-            tasks: [],
+            tasks: [
+                {
+                    title: 'task1',
+                    description: 'desc',
+                    date: '11/21/2022',
+                    priority: 'high'
+                }
+            ],
             title: '',
             description: '',
             date: '',

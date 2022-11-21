@@ -4,10 +4,10 @@
             <v-card>
                 <!-- panel header -->
                 <v-card-title class='headline primary justify-left' primary-title style="color: white">
-                    <div v-if="isAddTask">
+                    <div v-if="isAddTask" key="add">
                         <span class="fa-solid fa-circle-plus" />Add Task
                     </div>
-                    <div v-else>
+                    <div v-else key="edit">
                         <span class="fa-solid fa-pen-to-square" /> &nbsp; Edit Task
                     </div>
                 </v-card-title>
@@ -43,12 +43,12 @@
                     </v-radio-group>
 
                     <v-layout justify-end class="elements mx-2 mt-0 mb-2">
-                        <div v-if="isAddTask">
+                        <div v-if="isAddTask" key="add1">
                             <v-btn color="primary" elevation="2" @click="addTask" class="mr-2">
                                 <i class="fa-solid fa-circle-plus"></i> ADD
                             </v-btn>
                         </div>
-                        <div v-else>
+                        <div v-else key="edit1">
                             <v-btn color="primary" elevation="2" @click="editTask" class="mr-2">
                                 <i class="fa-solid fa-pen-to-square"></i> EDIT
                             </v-btn>
@@ -76,11 +76,12 @@ export default {
     },
     methods: {
         close() {
-            this.clear()
             this.$emit('close')
+            this.clear()
         },
         clear() {
             this.$refs.form.resetValidation()
+
             this.title = ''
             this.description = ''
             this.date = ''
@@ -113,9 +114,9 @@ export default {
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
         },
         getParentData() {
-            this.description = this.existing_description;
-            this.date = this.existing_date;
-            this.priority = this.existing_priority;
+            this.description = this.existing_description
+            this.date = this.parseDate(this.existing_date)
+            this.priority = this.existing_priority
         },
         isDistinctTitle(title) {
             return !this.tasks.filter(e => e.title === title).length > 0
@@ -125,12 +126,12 @@ export default {
         date() {
             this.dateFormatted = this.formatDate(this.date)
         },
-        isVisible(newVal) {
+        isAddTask(i) {
             this.$refs.form.resetValidation();
-            if (newVal && !this.isAddTask) {
+            if (!i) {
                 this.getParentData();
             }
-        },
+        }
     },
     data() {
         return {
