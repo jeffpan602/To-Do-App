@@ -49,9 +49,14 @@
                     </v-radio-group>
 
                     <v-layout justify-end class="elements mx-2 mt-0 mb-2">
-                        <div>
+                        <div v-if="isAddTask">
                             <v-btn color="primary" elevation="2" @click="addTask" class="mr-2">
                                 <i class="fa-solid fa-circle-plus"></i> ADD
+                            </v-btn>
+                        </div>
+                        <div v-else>
+                            <v-btn color="primary" elevation="2" @click="editTask" class="mr-2">
+                                <i class="fa-solid fa-pen-to-square"></i> EDIT
                             </v-btn>
                         </div>
                         <v-btn color="error" elevation="2" @click="close"> <span class="fa-solid fa-ban" />
@@ -77,10 +82,24 @@ export default {
     },
     methods: {
         close() {
-            this.$emit('close');
-
+            this.clear()
+            this.$emit('close')
+        },
+        clear() {
+            this.$refs.form.reset()
+            this.title = ''
+            this.description = ''
+            this.deadline = ''
+            this.priority = 'low'
         },
         addTask() {
+            if (this.$refs.form.validate()) {
+                this.$emit('addTask', this.title, this.description, this.deadline, this.priority);
+                this.clear();
+                this.close();
+            }
+        },
+        editTask() {
 
         }
     },

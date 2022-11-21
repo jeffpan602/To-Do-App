@@ -75,6 +75,7 @@ export default {
     data() {
         return {
             isVisible: false,
+            isAddTask: true,
 
             tasks: [],
             title: '',
