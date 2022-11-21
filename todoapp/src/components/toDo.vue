@@ -86,7 +86,15 @@ export default {
                 date: date,
                 priority: priority,
                 isComplete: false,
-            });
+            })
+            this.$toasted.success("The task has been sucessfully added!")
+        },
+        deleteTask(index) {
+            this.tasks.splice(index, 1)
+            this.$toasted.success("The task has been successfully deleted!")
+        },
+        updateTask() {
+
         }
     },
     //watchers
