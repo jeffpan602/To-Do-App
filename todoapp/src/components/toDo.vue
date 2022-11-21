@@ -38,6 +38,20 @@
                                     <v-checkbox v-model="tasks[index].isComplete" />
                                 </v-layout>
                             </td>
+                            <td>
+                                <v-layout justify-center v-if="!tasks[index].isComplete">
+                                    <v-btn class="button mt-4" color="primary" elevation="1" small
+                                        @click="updateTaskModal(index)">
+                                        <span class="fa-solid fa-pen-to-square" /> UPDATE
+                                    </v-btn>
+                                </v-layout>
+                                <v-layout justify-center>
+                                    <v-btn class="button mb-2" color="error" elevation="1" small
+                                        @click="deleteTask(index)">
+                                        <span class="fa-solid fa-circle-xmark" /> DELETE
+                                    </v-btn>
+                                </v-layout>
+                            </td>
                         </tr>
                     </tbody>
                 </template>
@@ -88,9 +102,9 @@ export default {
             tasks: [
                 {
                     title: 'task1',
-                    description: 'description1',
-                    date: '11/20/22',
-                    priority: 'low'
+                    description: 'desc1',
+                    date: '11/20/2020',
+                    priority: 'high'
                 }
             ],
             title: '',
