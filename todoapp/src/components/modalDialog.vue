@@ -34,13 +34,12 @@
                             <v-date-picker v-model="date" no-title scrollable :close-on-content-click="false">
                                 <v-spacer></v-spacer>
                                 <v-btn text color="primary" @click="date = false"> Cancel </v-btn>
-                                <v-btn text color="primary">OK</v-btn>
+                                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
                             </v-date-picker>
                         </v-menu>
                     </v-layout>
 
-
-                    <v-radio-group label="Priority" class="elements mx-6 my-0" v-model="priority">
+                    <v-radio-group label=" Priority" class="elements mx-6 my-0" v-model="priority">
                         <v-layout align-start row d-flex justify-space-between>
                             <v-radio label="Low" value="low" checked="true" /> &nbsp;
                             <v-radio label="Med" value="med" /> &nbsp;
@@ -101,11 +100,28 @@ export default {
         },
         editTask() {
 
+        },
+        formatDate(date) {
+            if (!date)
+                return null;
+            const [year, month, day] = date.split('-');
+            return `${month}/${day}/${year}`;
         }
+    },
+    watch: {
+        getDeadline() {
+            if (this.deadline.includes("-")) {
+                this.deadline = this.formatDate(this.deadline)
+            }
+        },
     },
     data() {
         return {
-            priority: 'low'
+            title: '',
+            description: '',
+            deadline: '',
+            priority: 'low',
+            date: '',
         }
 
     }

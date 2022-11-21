@@ -35,7 +35,7 @@
                             <td>{{ task.priority }}</td>
                             <td>
                                 <v-layout justify-center>
-                                    <v-checkbox />
+                                    <v-checkbox v-model="tasks[index].isComplete" />
                                 </v-layout>
                             </td>
                         </tr>
@@ -64,8 +64,16 @@ export default {
         },
         closeModalDialog() {
             this.isVisible = false
+        },
+        addTask(title, description, deadline, priority) {
+            this.tasks.push({
+                title: title,
+                description: description,
+                deadline: deadline,
+                priority: priority,
+                isComplete: false,
+            });
         }
-
     },
     //watchers
     watch: {},
