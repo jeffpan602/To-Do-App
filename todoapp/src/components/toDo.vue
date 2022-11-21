@@ -31,7 +31,7 @@
                         <tr v-for="(task, index) in tasks" :key="index">
                             <td class="text-center">{{ task.title }}</td>
                             <td class="text-center">{{ task.description }}</td>
-                            <td class="text-center">{{ task.deadline }}</td>
+                            <td class="text-center">{{ task.date }}</td>
                             <td class="text-center">{{ task.priority }}</td>
                             <td class="text-center">
                                 <v-layout justify-center>
@@ -43,7 +43,7 @@
                 </template>
             </v-simple-table>
         </v-card>
-        <modalDialog v-show="isVisible" @close="closeModalDialog" :isAddTask=isAddTask />
+        <modalDialog v-show="isVisible" @close="closeModalDialog" @addTask="addTask" :isAddTask=isAddTask />
     </v-app>
 </template>
 <script>
@@ -65,11 +65,11 @@ export default {
         closeModalDialog() {
             this.isVisible = false
         },
-        addTask(title, description, deadline, priority) {
+        addTask(title, description, date, priority) {
             this.tasks.push({
                 title: title,
                 description: description,
-                deadline: deadline,
+                date: date,
                 priority: priority,
                 isComplete: false,
             });
@@ -89,13 +89,13 @@ export default {
                 {
                     title: 'task1',
                     description: 'description1',
-                    deadline: '11/20/22',
+                    date: '11/20/22',
                     priority: 'low'
                 }
             ],
             title: '',
             description: '',
-            deadline: '',
+            date: '',
             priority: 'low',
             taskIndex: ''
         };
