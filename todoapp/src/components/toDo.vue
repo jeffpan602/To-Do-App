@@ -128,14 +128,7 @@ export default {
             isVisible: false,
             isAddTask: true,
 
-            tasks: [
-                {
-                    title: 'task1',
-                    description: 'desc1',
-                    date: '11/20/2020',
-                    priority: 'high'
-                }
-            ],
+            tasks: [],
             title: '',
             description: '',
             date: '',
