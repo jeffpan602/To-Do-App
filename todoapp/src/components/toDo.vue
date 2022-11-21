@@ -41,7 +41,7 @@
                             <td>
                                 <v-layout justify-center v-if="!tasks[index].isComplete">
                                     <v-btn class="button mt-4" color="primary" elevation="1" small
-                                        @click="updateTaskDialog(index)">
+                                        @click="editTaskDialog(index)">
                                         <span class="fa-solid fa-pen-to-square" /> UPDATE
                                     </v-btn>
                                 </v-layout>
@@ -103,7 +103,7 @@ export default {
             this.tasks.splice(index, 1)
             this.$toasted.success("The task has been successfully deleted!")
         },
-        updateTaskDialog(index) {
+        editTaskDialog(index) {
             this.taskIndex = index;
             this.isAddTask = false;
             this.description = this.tasks[this.taskIndex].description;
@@ -111,7 +111,7 @@ export default {
             this.priority = this.tasks[this.taskIndex].priority;
             this.showModalDialog();
         },
-        updateTask(description, date, priority) {
+        editTask(description, date, priority) {
             this.tasks[this.taskIndex].description = description;
             this.tasks[this.taskIndex].date = date;
             this.tasks[this.taskIndex].priority = priority;
