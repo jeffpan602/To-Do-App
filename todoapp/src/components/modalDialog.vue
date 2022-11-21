@@ -27,8 +27,8 @@
                         <v-menu v-ref="menu" :return-value.sync="deadline" transition="scale-transition" offset-y
                             min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="deadline" label="Deadline" append-icon="mdi-calendar"
-                                    v-bind="attrs" v-on="on" readonly outlined required
+                                <v-text-field v-model="date" label="Deadline" append-icon="mdi-calendar" v-bind="attrs"
+                                    v-on="on" readonly outlined required
                                     :rules="[v => !!v || 'Deadline is required']" />
                             </template>
                             <v-date-picker v-model="date" no-title scrollable :close-on-content-click="false">

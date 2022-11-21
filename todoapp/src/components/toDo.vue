@@ -29,11 +29,11 @@
                     <!--table body-->
                     <tbody>
                         <tr v-for="(task, index) in tasks" :key="index">
-                            <td>{{ task.title }}</td>
-                            <td>{{ task.description }}</td>
-                            <td>{{ task.deadline }}</td>
-                            <td>{{ task.priority }}</td>
-                            <td>
+                            <td class="text-center">{{ task.title }}</td>
+                            <td class="text-center">{{ task.description }}</td>
+                            <td class="text-center">{{ task.deadline }}</td>
+                            <td class="text-center">{{ task.priority }}</td>
+                            <td class="text-center">
                                 <v-layout justify-center>
                                     <v-checkbox v-model="tasks[index].isComplete" />
                                 </v-layout>
@@ -85,7 +85,14 @@ export default {
             isVisible: false,
             isAddTask: true,
 
-            tasks: [],
+            tasks: [
+                {
+                    title: 'task1',
+                    description: 'description1',
+                    deadline: '11/20/22',
+                    priority: 'low'
+                }
+            ],
             title: '',
             description: '',
             deadline: '',
