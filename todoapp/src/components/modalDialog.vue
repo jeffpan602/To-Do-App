@@ -14,25 +14,21 @@
                 <!-- panel body-->
                 <v-form ref="form" lazy-validation>
                     <v-layout v-if="isAddTask" class="elements mx-5 mb-0 mt-7">
-                        <v-text-field label="Title" outlined v-model="title" required
-                            :rules="[v => !!v || 'Title is Required!']" />
+                        <v-text-field label="Title" outlined v-model="title" required />
                     </v-layout>
 
-                    <v-layout v - layout class=" element mx-5 my-2">
-                        <v-text-field label="Description" outlined v-model="description" required
-                            :rules="[v => !!v || 'Description is Required!']" />
+                    <v-layout class=" element mx-5 my-2">
+                        <v-text-field label="Description" outlined v-model="description" required />
                     </v-layout>
 
-                    <v-layout class="elements mx-5 my-0">
-
-                        <v-menu v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y
-                            max-width="290px" min-width="auto">
+                    <v-layout justify-center class="elements mx-5 my-0">
+                        <v-menu ref="menu" :close-on-content-click="false" transition="scale-transition" offset-y
+                            min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="computedDateFormatted" label="Date (read only text field)"
-                                    hint="MM/DD/YYYY format" persistent-hint prepend-icon="mdi-calendar" readonly
-                                    v-bind="attrs" v-on="on"></v-text-field>
+                                <v-text-field v-model="computedDateFormatted" label="Deadline"
+                                    append-icon="mdi-calendar" v-bind="attrs" v-on="on" readonly outlined required />
                             </template>
-                            <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>
+                            <v-date-picker v-model="date" no-title scrollable></v-date-picker>
                         </v-menu>
                     </v-layout>
 
@@ -82,7 +78,7 @@ export default {
             this.$emit('close')
         },
         clear() {
-            this.$refs.form.reset()
+            //this.$refs.form.reset()
             this.title = ''
             this.description = ''
             this.date = ''
@@ -90,9 +86,9 @@ export default {
         },
         addTask() {
             if (this.$refs.form.validate()) {
-                this.$emit('addTask', this.title, this.description, this.formatDate(this.date), this.priority);
-                this.clear();
-                this.close();
+                this.$emit('addTask', this.title, this.description, this.formatDate(this.date), this.priority)
+                this.clear()
+                this.close()
             }
         },
         editTask() {
@@ -101,8 +97,8 @@ export default {
         formatDate(date) {
             if (!date)
                 return null;
-            const [year, month, day] = date.split('-');
-            return `${month}/${day}/${year}`;
+            const [year, month, day] = date.split('-')
+            return `${month}/${day}/${year}`
         },
         parseDate(date) {
             if (!date) return null
