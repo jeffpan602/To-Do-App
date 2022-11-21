@@ -7,7 +7,7 @@
                 <span class="fa-solid fa-bars" /> &nbsp; FRAMEWORKS
                 <v-spacer />
 
-                <v-btn @click="showModalDialog" color="primary" elevation="1">
+                <v-btn @click="addTaskDialog" color="primary" elevation="1">
                     <span class="fa-solid fa-circle-plus" />ADD
                 </v-btn>
 
@@ -41,7 +41,7 @@
                             <td>
                                 <v-layout justify-center v-if="!tasks[index].isComplete">
                                     <v-btn class="button mt-4" color="primary" elevation="1" small
-                                        @click="updateTaskModal(index)">
+                                        @click="updateTaskDialog(index)">
                                         <span class="fa-solid fa-pen-to-square" /> UPDATE
                                     </v-btn>
                                 </v-layout>
@@ -57,7 +57,14 @@
                 </template>
             </v-simple-table>
         </v-card>
-        <modalDialog v-show="isVisible" @close="closeModalDialog" @addTask="addTask" :isAddTask=isAddTask />
+        <modalDialog v-show="isVisible" @close="closeModalDialog" @addTask="addTask" :isAddTask=isAddTask
+            @editTask="editTask" :existing_description=description :existing_date=date :existing_priority=priority
+            :tasks=tasks />
+
+
+
+
+
     </v-app>
 </template>
 <script>
@@ -72,9 +79,12 @@ export default {
     created() { },
     //methods
     methods: {
+        addTaskDialog() {
+            this.isAddTask = true
+            this.showModalDialog()
+        },
         showModalDialog() {
             this.isVisible = true
-            this.isAddTask = true
         },
         closeModalDialog() {
             this.isVisible = false
@@ -93,8 +103,19 @@ export default {
             this.tasks.splice(index, 1)
             this.$toasted.success("The task has been successfully deleted!")
         },
-        updateTask() {
-
+        updateTaskDialog(index) {
+            this.taskIndex = index;
+            this.isAddTask = false;
+            this.description = this.tasks[this.taskIndex].description;
+            this.date = this.tasks[this.taskIndex].date;
+            this.priority = this.tasks[this.taskIndex].priority;
+            this.showModalDialog();
+        },
+        updateTask(description, date, priority) {
+            this.tasks[this.taskIndex].description = description;
+            this.tasks[this.taskIndex].date = date;
+            this.tasks[this.taskIndex].priority = priority;
+            this.$toasted.success("the task was updated successfully");
         }
     },
     //watchers

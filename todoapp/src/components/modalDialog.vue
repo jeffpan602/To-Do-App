@@ -68,7 +68,7 @@ export default {
         isVisible: Boolean,
         isAddTask: Boolean,
         existing_description: String,
-        existing_deadline: String,
+        existing_date: String,
         existing_priority: String,
         tasks: Array
     },
@@ -92,7 +92,11 @@ export default {
             }
         },
         editTask() {
-
+            if (this.$refs.form.validate()) {
+                this.$emit('editTask', this.description, this.formatDate(this.date), this.priority)
+                this.clear()
+                this.close()
+            }
         },
         formatDate(date) {
             if (!date)
@@ -105,12 +109,23 @@ export default {
 
             const [month, day, year] = date.split('/')
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-        }
+        },
+        getParentData() {
+            this.description = this.existing_description;
+            this.date = this.existing_date;
+            this.priority = this.existing_priority;
+        },
     },
     watch: {
         date() {
             this.dateFormatted = this.formatDate(this.date)
-        }
+        },
+        isVisible(newVal) {
+            this.$refs.form.resetValidation();
+            if (newVal && !this.isAddTask) {
+                this.getParentData();
+            }
+        },
     },
     data() {
         return {
