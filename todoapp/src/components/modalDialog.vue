@@ -14,11 +14,13 @@
                 <!-- panel body-->
                 <v-form ref="form" lazy-validation>
                     <v-layout v-if="isAddTask" class="elements mx-5 mb-0 mt-7">
-                        <v-text-field label="Title" outlined v-model="title" required />
+                        <v-text-field label="Title" outlined v-model="title" required :rules="[
+                        v => !!v || 'Title is Required!']" />
                     </v-layout>
 
                     <v-layout class=" element mx-5 my-2">
-                        <v-text-field label="Description" outlined v-model="description" required />
+                        <v-text-field label="Description" outlined v-model="description" required
+                            :rules="[v => !!v || 'Description is Required!']" />
                     </v-layout>
 
                     <v-layout justify-center class="elements mx-5 my-0">
@@ -26,7 +28,8 @@
                             min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="computedDateFormatted" label="Deadline"
-                                    append-icon="mdi-calendar" v-bind="attrs" v-on="on" readonly outlined required />
+                                    append-icon="mdi-calendar" v-bind="attrs" v-on="on" readonly outlined required
+                                    :rules="[v => !!v || 'Deadline is Required!']" />
                             </template>
                             <v-date-picker v-model="date" no-title scrollable></v-date-picker>
                         </v-menu>
@@ -34,7 +37,7 @@
 
                     <v-radio-group label=" Priority" class="elements mx-6 my-0" v-model="priority">
                         <v-layout align-start row d-flex justify-space-between>
-                            <v-radio label="Low" value="low" checked="true" /> &nbsp;
+                            <v-radio label="Low" value="low" /> &nbsp;
                             <v-radio label="Med" value="med" /> &nbsp;
                             <v-radio label="High" value="high" />
                         </v-layout>
@@ -78,7 +81,7 @@ export default {
             this.$emit('close')
         },
         clear() {
-            //this.$refs.form.reset()
+            this.$refs.form.reset()
             this.title = ''
             this.description = ''
             this.date = ''
