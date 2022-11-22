@@ -110,7 +110,6 @@ export default {
             this.tasks[this.taskIndex].date = date
             this.tasks[this.taskIndex].priority = priority
             this.$toasted.success("The task has been successfully updated!")
-            //this.isAddTask = true
         }
     },
     //watchers
@@ -129,14 +128,7 @@ export default {
             isVisible: false,
             isAddTask: true,
 
-            tasks: [
-                {
-                    title: 'task1',
-                    description: 'desc',
-                    date: '11/21/2022',
-                    priority: 'high'
-                }
-            ],
+            tasks: [],
             title: '',
             description: '',
             date: '',
