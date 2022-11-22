@@ -40,14 +40,12 @@
                             </td>
                             <td>
                                 <v-layout justify-center v-if="!tasks[index].isComplete">
-                                    <v-btn class="button mt-4" color="primary" elevation="1" small
-                                        @click="editTaskDialog(index)">
+                                    <v-btn class="button mt-4" color="primary" small @click="editTaskDialog(index)">
                                         <span class="fa-solid fa-pen-to-square" /> UPDATE
                                     </v-btn>
                                 </v-layout>
                                 <v-layout justify-center>
-                                    <v-btn class="delete button mb-2" color="error" elevation="1" small
-                                        @click="deleteTask(index)">
+                                    <v-btn class="delete button mb-2" color="error" small @click="deleteTask(index)">
                                         <span class="fa-solid fa-circle-xmark" /> DELETE
                                     </v-btn>
                                 </v-layout>
@@ -60,10 +58,6 @@
         <modalDialog v-show="isVisible" @close="closeModalDialog" @addTask="addTask" :isAddTask=isAddTask
             @editTask="editTask" :existing_description=description :existing_date=date :existing_priority=priority
             :tasks=tasks />
-
-
-
-
 
     </v-app>
 </template>
@@ -109,17 +103,24 @@ export default {
             this.description = this.tasks[this.taskIndex].description
             this.date = this.tasks[this.taskIndex].date
             this.priority = this.tasks[this.taskIndex].priority
-            this.showModalDialog();
+            this.showModalDialog()
         },
         editTask(description, date, priority) {
             this.tasks[this.taskIndex].description = description
             this.tasks[this.taskIndex].date = date
             this.tasks[this.taskIndex].priority = priority
             this.$toasted.success("The task has been successfully updated!")
+            //this.isAddTask = true
         }
     },
     //watchers
-    watch: {},
+    watch: {
+        isVisible(isVisible) {
+            if (!isVisible) {
+                this.isAddTask = true;
+            }
+        }
+    },
     //computed
     computed: {},
     //global vars

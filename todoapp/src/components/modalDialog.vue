@@ -8,7 +8,7 @@
                         <span class="fa-solid fa-circle-plus" />Add Task
                     </div>
                     <div v-else key="edit">
-                        <span class="fa-solid fa-pen-to-square" /> &nbsp; Edit Task
+                        <span class="fa-solid fa-pen-to-square" /> Edit Task
                     </div>
                 </v-card-title>
                 <!-- panel body-->
@@ -34,15 +34,15 @@
                         </v-menu>
                     </v-layout>
 
-                    <v-radio-group label=" Priority" class="elements mx-6 my-0" v-model="priority">
+                    <v-radio-group label="Priority" class="elements mx-6 my-0" v-model="priority">
                         <v-layout align-start row d-flex justify-space-between>
-                            <v-radio label="Low" value="low" /> &nbsp;
-                            <v-radio label="Med" value="med" /> &nbsp;
+                            <v-radio label="Low" value="low" />
+                            <v-radio label="Med" value="med" />
                             <v-radio label="High" value="high" />
                         </v-layout>
                     </v-radio-group>
 
-                    <v-layout justify-end class="elements mx-2 mt-0 mb-2">
+                    <v-layout justify-end class="elements mx-2 mt-2 mb-2">
                         <div v-if="isAddTask" key="add1">
                             <v-btn color="primary" elevation="2" @click="addTask" class="mr-2">
                                 <i class="fa-solid fa-circle-plus"></i> ADD
@@ -86,7 +86,6 @@ export default {
             this.description = ''
             this.date = ''
             this.priority = 'low'
-
         },
         addTask() {
             if (this.$refs.form.validate()) {
