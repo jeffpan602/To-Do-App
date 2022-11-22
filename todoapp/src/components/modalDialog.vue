@@ -86,6 +86,7 @@ export default {
             this.description = ''
             this.date = ''
             this.priority = 'low'
+
         },
         addTask() {
             if (this.$refs.form.validate()) {
